@@ -1,6 +1,10 @@
-import { Migrator } from '@mikro-orm/migrations'; // or `@mikro-orm/migrations-mongodb`
+import { defineConfig } from '@mikro-orm/sqlite';
 
-function defineConfig({}){
-
-  
-};
+export default defineConfig({
+  entities: ['./dist/**/*.entity.js'],
+  dbName: 'my-db-name',
+  migrations: {
+    path: './dist/migrations',
+    pathTs: './src/migrations',
+  },
+});

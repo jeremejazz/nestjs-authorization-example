@@ -5,12 +5,12 @@ import { SignInDTO } from './dto/signin.dto';
 
 @Injectable()
 export class AuthService {
-  async signUp(signupDto: SignUpDto): Promise<User> {
+  async signUp(signupDto: SignUpDto): Promise<User | void> {
 
-
+    
   }
 
-  async signIn(signInDTO: SignInDTO): Promise<User> {
+  async signIn(signInDTO: SignInDTO): Promise<User | void> { // to change
 
   }
 }

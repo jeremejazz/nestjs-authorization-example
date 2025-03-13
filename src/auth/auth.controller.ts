@@ -19,7 +19,7 @@ export class AuthController {
   @Post('signup')
   async signUp(
     @Body() signupDto: SignUpDto,
-  ): Promise<User> {
+  ): Promise<User | void> {
     const user = await this.authService.signUp(signupDto);
     
     return user;
