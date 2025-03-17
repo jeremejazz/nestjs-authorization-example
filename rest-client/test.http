@@ -1,5 +1,7 @@
-GET http://localhost:3000
 
-###
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+ 
 
-GET http://localhost:3000
+GET http://{{host}}

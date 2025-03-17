@@ -2,7 +2,8 @@ import { defineConfig } from '@mikro-orm/sqlite';
 
 export default defineConfig({
   entities: ['./dist/**/*.entity.js'],
-  dbName: 'my-db-name',
+  dbName: 'auth.sqlite',
+
   migrations: {
     path: './dist/migrations',
     pathTs: './src/migrations',

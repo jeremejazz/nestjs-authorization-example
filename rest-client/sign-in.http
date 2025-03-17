@@ -1,0 +1,13 @@
+
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+ 
+
+POST http://{{host}}/auth/signin
+content-type: application/json
+
+{
+    "username": "usertest",
+    "password": "test@12345"
+}
