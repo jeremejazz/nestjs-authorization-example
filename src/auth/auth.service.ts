@@ -16,9 +16,11 @@ export class AuthService {
       throw new BadRequestException('Username exists');
     }
 
+    const hashed = await this.hashPassword(password);
+
     return await this.usersService.create({
       username,
-      password,
+      password: hashed,
       fullName,
     });
   }
@@ -40,17 +42,10 @@ export class AuthService {
     return user;
   }
 
-  async hashPassword(
-    password: string,
-  ): Promise<{ hashed: string; salt: string }> {
+  async hashPassword(password: string): Promise<string> {
     const salt = await bcrypt.genSalt();
 
-    const hashed = await bcrypt.hash(password, salt);
-
-    return {
-      hashed,
-      salt,
-    };
+    return await bcrypt.hash(password, salt);
   }
 
   async comparePassword(password: string, hashed: string): Promise<boolean> {
