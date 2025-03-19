@@ -4,12 +4,14 @@ import { User } from '../users/entities/user.entity';
 import { SignInDTO } from './dto/signin.dto';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
+import { AuthTokens } from './interfaces/auth-tokens.interface';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService, private readonly jwtService: JwtService) {}
 
-  async signUp(signupDto: SignUpDto): Promise<User | null> {
+  async signUp(signupDto: SignUpDto): Promise<User> {
     const { username, password, fullName } = signupDto;
     const existing = await this.usersService.findByUsername(username);
     if (existing) {
@@ -25,7 +27,7 @@ export class AuthService {
     });
   }
 
-  async signIn(signInDTO: SignInDTO): Promise<User | void> {
+  async signIn(signInDTO: SignInDTO): Promise<AuthTokens & User> {
     const { username, password } = signInDTO;
 
     const user = await this.usersService.findByUsername(username);
@@ -39,7 +41,14 @@ export class AuthService {
       throw new BadRequestException('Invalid Login Credentials');
     }
 
-    return user;
+    const accessToken = await this.jwtService.signAsync({
+      sub: user.id,
+    });
+
+    return {
+      ...user,
+      accessToken,
+    };
   }
 
   async hashPassword(password: string): Promise<string> {

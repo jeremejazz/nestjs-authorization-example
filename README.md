@@ -4,14 +4,27 @@
 
 ## Project setup
 
+Create a copy of `.env.example` to `.env`
+
+```sh
+cp .env.example .env
+```
+
+Modify the configuration based on your preferences. 
+
+Install the modules: 
+
+
 ```bash
 $ npm install
 ```
 
 ## Migration
 
+Run the migration script
+
 ```
-npm run migration:create
+npm run migration:up
 ```
 
 ## Compile and run the project

@@ -1,0 +1,8 @@
+
+@hostname = localhost
+@port = 3000
+@host = {{hostname}}:{{port}}
+
+@token =   # paste token here
+GET http://{{host}}/users/profile
+Authorization: Bearer {{token}}
