@@ -1,5 +1,5 @@
 import { InjectRepository } from '@mikro-orm/nestjs';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { EntityRepository } from '@mikro-orm/sqlite';
 import { SignUpDto } from '../auth/dto/signup.dto';
@@ -23,7 +23,13 @@ export class UsersService {
 
     return user;
   }
-
+  async findOne(id: number): Promise<User>{
+    const user = await this.usersRepository.findOne({ id });
+    if(!user){
+      throw new NotFoundException("User not found");
+    }
+    return user;
+  }
   async findByUsername(username: string): Promise<User | null> {
     return await this.usersRepository.findOne({ username });
   }

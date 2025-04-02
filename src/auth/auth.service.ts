@@ -41,9 +41,11 @@ export class AuthService {
       throw new BadRequestException('Invalid Login Credentials');
     }
 
-    const accessToken = await this.jwtService.signAsync({
+    const payload = {
       sub: user.id,
-    });
+      username: user.username
+    };
+    const accessToken = await this.jwtService.signAsync(payload);
 
     return {
       ...user,
