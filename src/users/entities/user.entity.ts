@@ -1,5 +1,4 @@
 import { BeforeCreate, Entity, PrimaryKey, Property } from '@mikro-orm/core';
-import * as bcrypt from 'bcrypt';
 
 @Entity()
 export class User {
