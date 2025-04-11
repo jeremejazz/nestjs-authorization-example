@@ -2,7 +2,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { EntityRepository } from '@mikro-orm/sqlite';
-import { CreateUser } from './dto/create-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -11,7 +11,7 @@ export class UsersService {
     private readonly usersRepository: EntityRepository<User>,
   ) {}
 
-  async create(userDetails: CreateUser): Promise<User> {
+  async create(userDetails: CreateUserDto): Promise<User> {
     const { username, password, fullName } = userDetails;
     const user: User = this.usersRepository.create({
       username,

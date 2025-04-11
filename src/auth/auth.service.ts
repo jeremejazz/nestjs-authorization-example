@@ -1,5 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { CreateUser } from '../users/dto/create-user.dto';
+import { CreateUserDto } from '../users/dto/create-user.dto';
 import { User } from '../users/entities/user.entity';
 import { SignInDTO } from './dto/signin.dto';
 import * as bcrypt from 'bcrypt';
@@ -14,7 +14,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signUp(signupDto: CreateUser): Promise<User> {
+  async signUp(signupDto: CreateUserDto): Promise<User> {
     const { username, password, fullName } = signupDto;
     const existing = await this.usersService.findByUsername(username);
     if (existing) {
