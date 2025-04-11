@@ -3,7 +3,7 @@ import { AuthService } from './auth.service';
 import { SignInDTO } from './dto/signin.dto';
 import { User } from 'src/users/entities/user.entity';
 
-import { SignUpDto } from './dto/signup.dto';
+import { CreateUser } from '../users/dto/create-user.dto';
 import { Public } from './decorators/public.decorator';
 
 @Controller('auth')
@@ -18,7 +18,7 @@ export class AuthController {
 
   @Post('signup')
   @Public()
-  async signUp(@Body() signupDto: SignUpDto): Promise<User | null> {
+  async signUp(@Body() signupDto: CreateUser): Promise<User | null> {
     const user = await this.authService.signUp(signupDto);
 
     return user;

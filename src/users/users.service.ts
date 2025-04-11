@@ -2,7 +2,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { EntityRepository } from '@mikro-orm/sqlite';
-import { SignUpDto } from '../auth/dto/signup.dto';
+import { CreateUser } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -11,7 +11,7 @@ export class UsersService {
     private readonly usersRepository: EntityRepository<User>,
   ) {}
 
-  async create(userDetails: SignUpDto): Promise<User> {
+  async create(userDetails: CreateUser): Promise<User> {
     const { username, password, fullName } = userDetails;
     const user: User = this.usersRepository.create({
       username,
@@ -23,10 +23,10 @@ export class UsersService {
 
     return user;
   }
-  async findOne(id: number): Promise<User>{
+  async findOne(id: number): Promise<User> {
     const user = await this.usersRepository.findOne({ id });
-    if(!user){
-      throw new NotFoundException("User not found");
+    if (!user) {
+      throw new NotFoundException('User not found');
     }
     return user;
   }
