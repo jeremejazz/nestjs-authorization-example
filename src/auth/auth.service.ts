@@ -4,7 +4,6 @@ import { User } from '../users/entities/user.entity';
 import { SignInDTO } from './dto/signin.dto';
 import * as bcrypt from 'bcrypt';
 import { UsersService } from '../users/users.service';
-import { AuthTokens } from './interfaces/auth-tokens.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -30,7 +29,7 @@ export class AuthService {
     });
   }
 
-  async signIn(signInDTO: SignInDTO): Promise<AuthTokens & User> {
+  async signIn(signInDTO: SignInDTO) {
     const { username, password } = signInDTO;
 
     const user = await this.usersService.findByUsername(username);
