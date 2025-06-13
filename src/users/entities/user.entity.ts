@@ -1,4 +1,5 @@
-import { BeforeCreate, Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/core';
+import { Role } from '../../roles/entities/role.entity';
 
 @Entity()
 export class User {
@@ -24,6 +25,9 @@ export class User {
     name: 'updated_at',
   })
   public updatedAt: Date | null;
+
+  @ManyToMany({ entity: () => Role, mappedBy: 'users'})
+  roles = new Collection<Role>(this);
 
   constructor(data?: Partial<User>) {
     Object.assign(this, data);
