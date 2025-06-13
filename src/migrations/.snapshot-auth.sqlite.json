@@ -33,16 +33,6 @@
           "length": null,
           "mappedType": "text"
         },
-        "salt": {
-          "name": "salt",
-          "type": "text",
-          "unsigned": false,
-          "autoincrement": false,
-          "primary": false,
-          "nullable": true,
-          "length": null,
-          "mappedType": "text"
-        },
         "full_name": {
           "name": "full_name",
           "type": "text",
@@ -52,6 +42,26 @@
           "nullable": true,
           "length": null,
           "mappedType": "text"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "datetime"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "datetime",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": null,
+          "mappedType": "datetime"
         }
       },
       "name": "user",
