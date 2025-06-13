@@ -8,6 +8,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 import mikroOrmConfig from '../mikro-orm.config';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { RolesModule } from './roles/roles.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     MikroOrmModule.forRoot(mikroOrmConfig),
     AuthModule,
     UsersModule,
+    RolesModule,
   ],
   controllers: [AppController],
   providers: [AppService, {
